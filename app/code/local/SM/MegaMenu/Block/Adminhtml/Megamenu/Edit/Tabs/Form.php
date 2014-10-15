@@ -111,23 +111,60 @@ class SM_MegaMenu_Block_Adminhtml_Megamenu_Edit_Tabs_Form
 
 	protected function _getCategories(){
 
-	    $category = Mage::getModel('catalog/category'); 
-	    $tree = $category->getTreeModel(); 
+	    $category = Mage::getModel('catalog/category');
+
+	    $tree = $category->getTreeModel();
 	    $tree->load();
-	    $ids = $tree->getCollection()->getAllIds(); 
+	    $ids = $tree->getCollection()->getAllIds();
 	    $arr = array();
 	    if ($ids){ 
-	    foreach ($ids as $id){ 
-	    $cat = Mage::getModel('catalog/category'); 
-	    $cat->load($id);
-	    $arr[$id] = $cat->getName();
-	    } 
+            foreach ($ids as $id){
+            $cat = Mage::getModel('catalog/category');
+            $cat->load($id);
+            $arr[$id] = $cat->getName();
+            }
 	    }
+//        echo "<pre>";print_r($arr);die;
 
-	    return $arr;
+        //---------
+        $data = Mage::getModel('catalog/category')->getCollection()->addAttributeToSelect('name');
+        $categories = array();
+        $tempCate = array();
+        foreach($data as $cate){
+            $pre = '';
+            for($i=0;$i<$cate['level'];$i++){
+                $pre .= '-----';
+            }
+            $tempCate[] = array(
+                'label'     => $pre.$cate['name'],
+                'value'     => $cate['entity_id'],
+                'level'     => $cate['level'],
+                'parent_id' => $cate['parent_id']
+            );
+        }
+        //get categories level 0
+        foreach($tempCate as $tempKey=>$tempValue){
+            if($tempValue['level']==0){
+                $categories[] = $tempValue;
+                unset($tempCate[$tempKey]);
+            }
+        }
+        //get remain categories
+        for($i=0;1;$i++){
+            foreach($tempCate as $tempKey=>$tempValue){
+                if($tempValue['parent_id']==$categories[$i]['value']){
+                    array_splice($categories,$i+1,0,array($tempValue));
+                    unset($tempCate[$tempKey]);
+                }
+            }
+            if(count($tempCate)<=0) break;
+        }
+
+        return $categories;
+        echo "<pre>";print_r($categories);die;
+//	    return $arr;
 
 	}
 
 	
 }
- ?>
