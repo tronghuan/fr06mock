@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-        <SM_Base>
+        <SM_Featured>
             <active>true</active>
             <codePool>local</codePool>
-            <depends></depends>
-        </SM_Base>
+            <depends>sm_base</depends>
+        </SM_Featured>
     </modules>
 </config>
