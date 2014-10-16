@@ -84,56 +84,17 @@ class SM_MegaMenu_Block_Adminhtml_Megamenu_Edit_Tabs_Form
         );
 
         $form->setValues($data);
-       /* $product1Link = $fieldset->addField('product1_link', 'label', array(
-                'name' => 'product1_link',
-                'label' => Mage::helper('sm_megamenu')->__('Product 1'),
-                'class' => 'widget-option',
-                'value' => $model->getProduct1Link(),
-                'required' => true,
-            ));
-
-        $model->unsProduct1Link();
-        $helperBlock = $this->getLayout()->createBlock('adminhtml/catalog_product_widget_chooser');
-        if ($helperBlock instanceof Varien_Object) {
-            $helperBlock->setConfig(array(
-            	'input_name'  => 'entity_link',
-        	    'input_label' => $this->__('Product'),
-        	    'button_text' => $this->__('Select Product...'),
-        	    'required'    => true,
-            	))
-                ->setFieldsetId($fieldset->getId())
-                ->setTranslationHelper(Mage::helper('sm_megamenu'))
-                ->prepareElementHtml($product1Link);
-        }
-*/
 		return parent::_prepareForm();
 	}
 
 	protected function _getCategories(){
-
-	    $category = Mage::getModel('catalog/category');
-
-	    $tree = $category->getTreeModel();
-	    $tree->load();
-	    $ids = $tree->getCollection()->getAllIds();
-	    $arr = array();
-	    if ($ids){ 
-            foreach ($ids as $id){
-            $cat = Mage::getModel('catalog/category');
-            $cat->load($id);
-            $arr[$id] = $cat->getName();
-            }
-	    }
-//        echo "<pre>";print_r($arr);die;
-
-        //---------
         $data = Mage::getModel('catalog/category')->getCollection()->addAttributeToSelect('name');
         $categories = array();
         $tempCate = array();
         foreach($data as $cate){
             $pre = '';
-            for($i=0;$i<$cate['level'];$i++){
-                $pre .= '-----';
+            for($i=1;$i<$cate['level'];$i++){
+                $pre .= '__';
             }
             $tempCate[] = array(
                 'label'     => $pre.$cate['name'],
@@ -159,11 +120,7 @@ class SM_MegaMenu_Block_Adminhtml_Megamenu_Edit_Tabs_Form
             }
             if(count($tempCate)<=0) break;
         }
-
         return $categories;
-        echo "<pre>";print_r($categories);die;
-//	    return $arr;
-
 	}
 
 	
