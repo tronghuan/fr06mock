@@ -40,11 +40,17 @@
 ?>
 
 <a href="#header-cart" class="skip-link skip-cart <?php if($_cartQty <= 0): ?> no-count<?php endif; ?>">
-    <span class="icon"></span>
+    <span class="icon icon-radius"></span>
     <span class="label"><?php echo $this->__('Cart'); ?></span>
     <span class="count"><?php echo $_cartQty; ?></span>
+    <span class="block-subtotal">
+		<?php $cartBlock = $this->getLayout()->getBlockSingleton('checkout/cart_sidebar') ?>
+		<span class="label">- <?php echo $this->__('Cart Subtotal'); ?>:</span>
+		<?php echo Mage::helper('checkout')->formatPrice($cartBlock->getSubtotal()) ?>
+	</span>
 </a>
 
 <div id="header-cart" class="block block-cart skip-content">
     <?php echo $this->getChildHtml('minicart_content');?>
 </div>
+

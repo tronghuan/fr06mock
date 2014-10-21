@@ -8,7 +8,7 @@
     <frontend>
         <layout>
             <updates>
-                <sm_featured>
+                <sm_featured module="sm_featured">
                     <file>sm_featured.xml</file>
                 </sm_featured>
             </updates>

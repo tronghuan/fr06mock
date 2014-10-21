@@ -9,7 +9,7 @@ class SM_Featured_Helper_Data
 	
 	public function getTemplateForHomePage()	
 	{
-		if (Mage::getStoreConfig('sm_featured/general/enable') 
+		if (Mage::getStoreConfig('sm_featured/general/enable')
 			&& Mage::getStoreConfig('sm_featured/general/show_in_home')) {
 			return self::TEMPLATE_FILE;
 		}
@@ -25,4 +25,3 @@ class SM_Featured_Helper_Data
 		return;
 	}
 }
- ?>

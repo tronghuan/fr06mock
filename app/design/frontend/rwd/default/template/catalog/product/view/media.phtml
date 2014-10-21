@@ -36,8 +36,22 @@
     $_product = $this->getProduct();
     $_helper = $this->helper('catalog/output');
 ?>
+<style>
+    
+
+</style>
 <div class="product-image product-image-zoom">
-    <div class="product-image-gallery">
+    <?php 
+    $_tag = '<div class="product-image-gallery">';
+    if (Mage::helper('sm_productlabel')->isProductLabelEnable()) {
+        $labelBlock = Mage::app()->getLayout()
+            ->createBlock('sm_productlabel/label')
+            ->setProduct($_product)
+            ->setOpenTag($_tag)
+            ->toHtml();
+        echo $labelBlock;
+    } else { echo $_tag; }
+     ?>
         <img id="image-main"
              class="gallery-image visible"
              src="<?php echo $this->helper('catalog/image')->init($_product, 'image') ?>"

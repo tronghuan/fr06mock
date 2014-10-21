@@ -29,5 +29,3 @@ $install->addAttribute(Mage_Catalog_Model_Product::ENTITY, $newAttribute,
 		));
 
 $install->endSetup();
-
-?>

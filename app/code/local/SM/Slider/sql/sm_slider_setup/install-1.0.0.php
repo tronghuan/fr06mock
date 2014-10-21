@@ -85,4 +85,4 @@ $tableImage = $installer->getConnection()
 $installer->getConnection()->createTable($tableImage);
 
 
-$installer->endSetup();
+$install->endSetup();

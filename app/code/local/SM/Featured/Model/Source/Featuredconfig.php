@@ -21,4 +21,3 @@ class SM_Featured_Model_Source_Featuredconfig
 		return $this->_options;
 	}
 }
- ?>

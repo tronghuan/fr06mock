@@ -12,6 +12,7 @@ class SM_Slider_Block_Adminhtml_Image_Edit_Tabs_Form
         } else {
             $data = array();
         }
+        // Zend_Debug::dump($data);die();
 
         $form = new Varien_Data_Form();
         $this->setForm($form);
@@ -21,8 +22,6 @@ class SM_Slider_Block_Adminhtml_Image_Edit_Tabs_Form
             ));
         $imageFieldset->addField('path', 'image', array(
             'name' => 'path',
-            'width' => '500',
-            'height' => '100',
             'required' => true
             ));
 
@@ -59,7 +58,7 @@ class SM_Slider_Block_Adminhtml_Image_Edit_Tabs_Form
             'name' => 'sort_order',
             ));
 
-        $fieldset->addField('slider_id', 'select', array(
+        $staticBlockSelect = $fieldset->addField('slider_id', 'select', array(
             'label' => Mage::helper('sm_slider')->__('Select slider id'),
             'class' => 'required-entity',
             'required' => true,
@@ -69,8 +68,31 @@ class SM_Slider_Block_Adminhtml_Image_Edit_Tabs_Form
 
 
         $form->setValues($data);
+       /* $product1Link = $fieldset->addField('product1_link', 'label', array(
+                'name' => 'product1_link',
+                'label' => Mage::helper('sm_slider')->__('Product 1'),
+                'class' => 'widget-option',
+                'value' => $model->getProduct1Link(),
+                'required' => true,
+            ));
+
+        $model->unsProduct1Link();
+        $helperBlock = $this->getLayout()->createBlock('adminhtml/catalog_product_widget_chooser');
+        if ($helperBlock instanceof Varien_Object) {
+            $helperBlock->setConfig(array(
+            	'input_name'  => 'entity_link',
+        	    'input_label' => $this->__('Product'),
+        	    'button_text' => $this->__('Select Product...'),
+        	    'required'    => true,
+            	))
+                ->setFieldsetId($fieldset->getId())
+                ->setTranslationHelper(Mage::helper('sm_slider'))
+                ->prepareElementHtml($product1Link);
+        }
+*/
 		return parent::_prepareForm();
 	}
 
 
 }
+ ?>

@@ -4,9 +4,7 @@
         <SM_Slider>
             <active>true</active>
             <codePool>local</codePool>
-            <depends>
-                <SM_Base />
-            </depends>
+            <depends>sm_base</depends>
         </SM_Slider>
     </modules>
 </config>
