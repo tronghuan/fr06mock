@@ -11,7 +11,7 @@
                     <div class="swiper-slider-inner">
                         <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_product->getName()) ?>" class="product-image">
                             <?php $_imgSize = 260; ?>
-                            <?php if (false) {
+                            <?php if ($this->isShowLabel()) {
                                 $labelBlock = Mage::app()->getLayout()
                                     ->createBlock('sm_productlabel/label')
                                     ->setProduct($_product)

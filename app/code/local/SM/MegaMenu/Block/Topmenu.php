@@ -5,6 +5,7 @@
 class SM_MegaMenu_Block_Topmenu
 	extends Mage_Page_Block_Html_Topmenu
 {
+    protected $i = 1;
 	/**
 	 * Get top menu html
 	 *
@@ -49,7 +50,6 @@ class SM_MegaMenu_Block_Topmenu
 	    $tree = $menu->getTree();
 
 	    $collection = $this->_getCollection();
-
 	    foreach ($collection as $item) {
 
 	   		if ($item->getType() == 'category') {
@@ -92,30 +92,27 @@ class SM_MegaMenu_Block_Topmenu
 			->addFieldToFilter('is_active', 1);
 		return $collection;
 	}
+	protected function _getChildNodeById($id, &$parentNode){
+        $items = Mage::getResourceModel('catalog/category_collection')
+            ->setStore(Mage::app()->getStore())
+            ->addIsActiveFilter()
+            ->addNameToResult()
+            ->addAttributeToFilter('parent_id', $id)
+            ->addAttributeToFilter('level', array('lteq' => Mage::getStoreConfig('sm_megamenu/general/level')));
 
-	protected function _getChildNodeById($id, &$parentNode)
-	{
-		$items = Mage::getResourceModel('catalog/category_collection')
-			->setStore(Mage::app()->getStore())
-			->addIsActiveFilter()
-			->addNameToResult()
-			->addAttributeToFilter('parent_id', $id);
-			
-		$tree = $parentNode->getTree();
-		
-		foreach ($items as $item) {
+        $tree = $parentNode->getTree();
+        foreach ($items as $item) {
+            $node = new Varien_Data_Tree_Node(array(
+                'name'   => $item->getName(),
+                'id'     => 'categories-'.$item->getId(),
+                'url'    => $item->getUrl(), // point somewhere
+            ), 'id', $tree, $parentNode);
+            $parentNode->addChild($node);
 
-			$node = new Varien_Data_Tree_Node(array(
-			        'name'   => $item->getName(),
-			        'id'     => 'categories-'.$item->getId(),
-			        'url'    => $item->getUrl(), // point somewhere
-			), 'id', $tree, $parentNode);
-			$parentNode->addChild($node);
-
-			if ($item->hasChildren()) {
-				$this->_getChildNodeById($item->getId(), $node);
-			}
-		}
+            if ($item->hasChildren()) {
+                $this->_getChildNodeById($item->getId(), $node);
+            }
+        }
 	}
 
 }

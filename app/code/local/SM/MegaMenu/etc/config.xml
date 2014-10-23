@@ -57,6 +57,7 @@
         <sm_megamenu>
             <general>
                 <enable>1</enable>
+                <level>3</level>
             </general>
         </sm_megamenu>
     </default>

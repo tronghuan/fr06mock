@@ -1,40 +1,33 @@
 <?php
-/**
-*
-*/
-class SM_MegaMenu_Adminhtml_Sm_MegamenuController
-	extends Mage_Adminhtml_Controller_Action
-{
 
-	public function indexAction()
-	{
+/**
+ * Class SM_MegaMenu_Adminhtml_Sm_MegamenuController
+ * @author HuanDT
+ */
+class SM_MegaMenu_Adminhtml_Sm_MegamenuController extends Mage_Adminhtml_Controller_Action{
+	public function indexAction(){
 		$this->loadLayout();
 		$this->_setActiveMenu('sm_base');
 		$this->renderLayout();
 	}
-	public function newAction()
-	{
+	public function newAction(){
 		$this->_forward('edit');
 	}
 
-	public function editAction()
-	{
+	public function editAction(){
 		$id = $this->getRequest()->getParam('id', null);
 		$model = Mage::getModel('sm_megamenu/megamenu');
 		if ($id) {
 			# edit action
 			$model->load((int)$id);
 			if ($model->getId()) {
-				// Mage_Adminhtml_Model_Session
 				$data = Mage::getSingleton('adminhtml/session')->getFormData(true);
-
 				if ($data) {
 					$model->setData($data)->setId($id);
 				} else {
 					$model->setData($this->_processDataToEdit($model->getData()));
 				}
 			} else {
-				# id not exist
 				Mage::getSingleton('adminhtml/session')
 					->addError('Mega Menu does not exist');
 				$this->_redirect('*/*/');
@@ -52,14 +45,11 @@ class SM_MegaMenu_Adminhtml_Sm_MegamenuController
 		if ($data = $this->getRequest()->getPost()) {
 			$model = Mage::getModel('sm_megamenu/megamenu');
 			$id = $this->getRequest()->getParam('id');
-
-			if ($id) {
+			if($id){
 				$model->load($id);
 			}
 			$model->setData($data);
-
 			Mage::getSingleton('adminhtml/session')->setFormData($data);
-
 			try {
 				if ($id) {
 					$model->setId($id);
@@ -71,7 +61,6 @@ class SM_MegaMenu_Adminhtml_Sm_MegamenuController
 				Mage::getSingleton('adminhtml/session')
 					->addSuccess(Mage::helper('sm_megamenu')->__('Mage Menu was successfully saved'));
 				Mage::getSingleton('adminhtml/session')->setFormData(false);
-
 				$this->_redirect('*/*/');
 			} catch (Exception $e) {
 				Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
@@ -112,24 +101,6 @@ class SM_MegaMenu_Adminhtml_Sm_MegamenuController
 				->__('Unable to find the Mage Menu to delete'));
 		$this->_redirect('*/*/');
 	}
-
-	// protected function _processDataToSave(&$data)
-	// {
-		// switch ($data['type']) {
-		// 	case 'category':
-		// 		$data['type_value'] = $data['category_select'];
-		// 		break;
-
-		// 	case 'static_block':
-		// 		$data['type_value'] = $data['static_block_select'];
-		// 		break;
-
-		// 	default:
-
-		// 		break;
-		// }
-	// }
-
 	protected function _processDataToEdit($data)
 	{
 		switch ($data['type']) {

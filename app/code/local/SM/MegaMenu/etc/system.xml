@@ -27,6 +27,15 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </enable>
+                        <level translate="label">
+                            <label>Level</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>Config category level</comment>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </level>
                     </fields>
                 </general>
             </groups>

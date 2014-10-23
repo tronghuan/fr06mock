@@ -4,9 +4,7 @@
         <SM_MegaMenu>
             <active>true</active>
             <codePool>local</codePool>
-            <depends>
-                <SM_Base />
-            </depends>
+            <depends>sm_base</depends>
         </SM_MegaMenu>
     </modules>
 </config>

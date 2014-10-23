@@ -2,7 +2,7 @@
 <config>
     <tabs>
         <sm_base translate="label">
-            <label>SM Extention</label>
+            <label>SM Configurations</label>
             <sort_order>200</sort_order>
         </sm_base>
     </tabs>

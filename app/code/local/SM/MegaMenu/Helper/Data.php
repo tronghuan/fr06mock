@@ -7,5 +7,3 @@ class SM_MegaMenu_Helper_Data
 {
 
 }
-
- ?>

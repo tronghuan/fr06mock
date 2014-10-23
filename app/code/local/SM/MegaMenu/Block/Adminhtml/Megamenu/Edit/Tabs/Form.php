@@ -88,6 +88,7 @@ class SM_MegaMenu_Block_Adminhtml_Megamenu_Edit_Tabs_Form
 	}
 
 	protected function _getCategories(){
+        $level = Mage::getStoreConfig('sm_megamenu/general/level');
         $data = Mage::getModel('catalog/category')->getCollection()->addAttributeToSelect('name');
         $categories = array();
         $tempCate = array();
@@ -113,6 +114,7 @@ class SM_MegaMenu_Block_Adminhtml_Megamenu_Edit_Tabs_Form
         //get remain categories
         for($i=0;1;$i++){
             foreach($tempCate as $tempKey=>$tempValue){
+
                 if($tempValue['parent_id']==$categories[$i]['value']){
                     array_splice($categories,$i+1,0,array($tempValue));
                     unset($tempCate[$tempKey]);
@@ -120,6 +122,7 @@ class SM_MegaMenu_Block_Adminhtml_Megamenu_Edit_Tabs_Form
             }
             if(count($tempCate)<=0) break;
         }
+
         return $categories;
 	}
 

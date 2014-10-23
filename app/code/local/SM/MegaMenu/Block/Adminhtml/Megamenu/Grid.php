@@ -1,8 +1,14 @@
 <?php
 
-class SM_MegaMenu_Block_Adminhtml_Megamenu_Grid
-    extends Mage_Adminhtml_Block_Widget_Grid
+/**
+ * Class SM_MegaMenu_Block_Adminhtml_Megamenu_Grid
+ * @author HuanDT
+ */
+class SM_MegaMenu_Block_Adminhtml_Megamenu_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
+    /**
+     * Chi ro nhung tuy chon cho Grid Class: gia tri sap xep mac dinh, chieu sap xep
+     */
     public function __construct()
     {
         parent::__construct();
@@ -12,6 +18,10 @@ class SM_MegaMenu_Block_Adminhtml_Megamenu_Grid
         $this->setSaveParametersInSession(false);
     }
 
+    /**
+     * load du lieu tu bang sm_megamenu
+     * @return Mage_Adminhtml_Block_Widget_Grid
+     */
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('sm_megamenu/megamenu')->getCollection();
@@ -19,6 +29,10 @@ class SM_MegaMenu_Block_Adminhtml_Megamenu_Grid
         return parent::_prepareCollection();
     }
 
+    /**
+     * Chuan bi cac cot duoc dua ra ngoai grid
+     * @return $this
+     */
     protected function _prepareColumns()
     {
         $this->addColumn('sm_megamenu_id', array(

@@ -35,10 +35,10 @@ class SM_Featured_Block_Product extends Mage_Catalog_Block_Product_Abstract
     }
     public function isShowLabel()
     {
-//        if (Mage::getStoreConfigFlag('sm_featured/general/show_label')
-//            && Mage::getStoreConfigFlag('sm_productlabel/general/enable')) {
-//            return true;
-//        }
+        if (Mage::getStoreConfigFlag('sm_featured/general/show_label')
+            && Mage::getStoreConfigFlag('sm_productlabel/general/enable')) {
+            return true;
+        }
         return false;
     }
     /**
@@ -101,38 +101,38 @@ class SM_Featured_Block_Product extends Mage_Catalog_Block_Product_Abstract
     public function _getSwipperScript()
     {
         $script = "<script>
-\$j(function() {
-var featuredSwiper = \$j('.swiper-featured-container').swiper({
-slidesPerView:".$this->_getSlidePerView().",
-loop: true,";
-        if (Mage::getStoreConfig('sm_featured/general/type') == '3d') {
-            $script .= "
-centeredSlides: true,
-initialSlide: 7,
-tdFlow: {
-rotate : 30,
-stretch :10,
-depth: 150
-},
-";
-        }
-        $script .= "
-offsetPxBefore:10,
-offsetPxAfter:10,
-calculateHeight: true,
-autoplay: ".$this->_getAutoplay().",
-speed: ".$this->_getSpeed().",
-";
-        $script .= '});
-$j(".swiper-featured-container .arrow-left").on("click", function(e){
-e.preventDefault()
-featuredSwiper.swipePrev()
-});
-$j(".swiper-featured-container .arrow-right").on("click", function(e){
-e.preventDefault()
-featuredSwiper.swipeNext()
-});
-})</script>';
+            \$j(function() {
+            var featuredSwiper = \$j('.swiper-featured-container').swiper({
+            slidesPerView:".$this->_getSlidePerView().",
+            loop: true,";
+                    if (Mage::getStoreConfig('sm_featured/general/type') == '3d') {
+                        $script .= "
+            centeredSlides: true,
+            initialSlide: 7,
+            tdFlow: {
+            rotate : 30,
+            stretch :10,
+            depth: 150
+            },
+            ";
+                    }
+                    $script .= "
+            offsetPxBefore:10,
+            offsetPxAfter:10,
+            calculateHeight: true,
+            autoplay: ".$this->_getAutoplay().",
+            speed: ".$this->_getSpeed().",
+            ";
+                    $script .= '});
+            $j(".swiper-featured-container .arrow-left").on("click", function(e){
+            e.preventDefault()
+            featuredSwiper.swipePrev()
+            });
+            $j(".swiper-featured-container .arrow-right").on("click", function(e){
+            e.preventDefault()
+            featuredSwiper.swipeNext()
+            });
+            })</script>';
         return $script;
     }
 }
