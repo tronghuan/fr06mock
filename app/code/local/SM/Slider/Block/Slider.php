@@ -6,7 +6,27 @@ class SM_Slider_Block_Slider
 	extends Mage_Core_Block_Template
     implements Mage_Widget_Block_Interface
 {
+    /**
+     * A model to serialize attributes
+     * @var Varien_Object
+     */
+    protected $_serializer = null;
 
+    /**
+     * Initialization
+     */
+    protected function _construct()
+    {
+        $this->_serializer = new Varien_Object();
+        parent::_construct();
+    }
+
+
+    protected function _toHtml(){
+        $list = $this->getImages()->getData();
+        $this->assign('list', $list);
+        return parent::_toHtml();
+    }
 	protected function _getSliderId()
 	{
         if ($this->getSliderId()) {

@@ -3,7 +3,7 @@
 
     <cms_index_index>
         <reference name="content">
-            <block type="sm_featured/product" name="home.catalog.product.featured" before="-">
+            <block type="sm_featured/product" name="home.catalog.product.featured" after="-">
                 <action method="setTemplate">
                     <template helper="sm_featured/getTemplateForHomePage"></template>
                 </action>

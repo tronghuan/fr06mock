@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<layout>
-	<cms_index_index>
-		<reference name="top.container">
-			<block type="sm_slider/slider" name="sm_slider" template="sm/slider/slider.phtml" />
-		</reference>
-	</cms_index_index>
-</layout>
