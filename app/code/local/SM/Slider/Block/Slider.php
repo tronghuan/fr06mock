@@ -4,13 +4,16 @@
 */
 class SM_Slider_Block_Slider 
 	extends Mage_Core_Block_Template
+    implements Mage_Widget_Block_Interface
 {
+
 	protected function _getSliderId()
 	{
-		if ($this->getSliderId()) {
-			return $this->getSliderId();
-		}
-		elseif (Mage::getStoreConfig('sm_slider/general/homeslide')) {
+        if ($this->getSliderId()) {
+            return $this->getSliderId();
+        }
+        else
+        if (Mage::getStoreConfig('sm_slider/general/homeslide')) {
 			return Mage::getStoreConfig('sm_slider/general/homeslide');
 		}
 		else {
